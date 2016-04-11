@@ -1,7 +1,5 @@
 #pragma once
 
-#include "state.hpp"
-
 namespace mcts {
 template <class State>
 class Node;
