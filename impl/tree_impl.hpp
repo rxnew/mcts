@@ -3,7 +3,7 @@
 namespace mcts {
 template <class State, class F>
 auto Tree::_getNodePosition(const Nodes<State>& nodes, const F& function)
-  -> void {
+  -> NodesItr<State> {
   auto node_pos = nodes.cend();
   double max_value = -1.0;
   for(auto it = nodes.cbegin(); it != nodes.cend(); it++) {
@@ -63,6 +63,7 @@ auto Tree::_update(const Node<State>* const root_node,
 
 template <class State>
 auto Tree::_selectBetterState(const Node<State>* const root_node) -> State {
+  assert(!root_node->isLeafNode());
   auto function = [](Node<State>* node) {return node->getValue();};
   return (*Tree::_getNodePosition(root_node->child_nodes_, function))->state_;
   /*

@@ -11,7 +11,7 @@ class Tree {
   Tree() = delete;
   template <class State, class F>
   static auto _getNodePosition(const Nodes<State>& nodes,
-                               const F& function) -> void;
+                               const F& function) -> NodesItr<State>;
   template <class State>
   static auto _selectPlayoutNode(const Nodes<State>& leaf_nodes,
                                  int total_count) -> NodesItr<State>;
