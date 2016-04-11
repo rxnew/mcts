@@ -8,7 +8,7 @@ auto Tree::_selectPlayoutNode(const Nodes<State>& leaf_nodes, int total_count)
   double max_value = -1.0;
   for(auto it = leaf_nodes.cbegin(); it != leaf_nodes.cend(); it++) {
     assert((*it)->isLeafNode());
-    auto value = (*it)->getValue(total_count);
+    auto value = (*it)->getValueUCT(total_count);
     if(value > max_value) {
       selected_node_pos = it;
       max_value = value;
@@ -43,10 +43,9 @@ template <class State>
 auto Tree::_selectBetterState(const Node<State>* const root_node) -> State {
   Node<State>* result_node = nullptr;
   double max_value = -1.0;
-  const int total_count = root_node->count_;
   assert(!root_node->isLeafNode());
   for(auto* node : root_node->child_nodes_) {
-    auto value = node->getValue(total_count);
+    auto value = node->getValue();
     if(value > max_value) {
       result_node = node;
       max_value = value;

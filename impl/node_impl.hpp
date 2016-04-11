@@ -25,17 +25,22 @@ auto Node<State>::setChildNodes() -> bool {
     auto* node = new Node<State>(state);
     node->parent_node_ = this;
     this->child_nodes_.push_back(node);
-    
   }
   return true;
 }
 
 template <class State>
-inline auto Node<State>::getValue(int total_count) const -> double {
+inline auto Node<State>::getValue() const -> double {
+  assert(this->count_);
+  return static_cast<double>(this->score_) / this->count_;
+}
+
+template <class State>
+inline auto Node<State>::getValueUCT(int total_count) const -> double {
   assert(this->count_);
   auto x = static_cast<double>(this->score_) / this->count_;
   auto y = std::sqrt(std::log(total_count) / this->count_);
-  return x + params::evaluation_param * y;
+  return x + params::exploration_param * y;
 }
 
 template <class State>

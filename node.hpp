@@ -23,7 +23,8 @@ class Node {
   explicit Node(T&& state);
   ~Node();
   auto setChildNodes() -> bool;
-  auto getValue(int total_count) const -> double;
+  auto getValue() const -> double;
+  auto getValueUCT(int total_count) const -> double;
   auto isLeafNode() const -> bool;
   auto update(int score) -> void;
   auto playout() -> void;

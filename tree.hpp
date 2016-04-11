@@ -21,8 +21,6 @@ class Tree {
   static auto _selectBetterState(const Node<State>* const root_node) -> State;
 
  public:
-  static auto setParams(int playout_number, int playout_limit,
-                        double evaluation_param) -> void;
   template <class T, class State = typename std::remove_reference<T>::type>
   static auto search(T&& state) -> State;
 };
