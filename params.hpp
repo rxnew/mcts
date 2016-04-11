@@ -1,3 +1,8 @@
+/**
+ * @file params.hpp
+ * @brief header of parameters of MCTS
+ */
+
 #pragma once
 
 namespace mcts {

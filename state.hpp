@@ -1,3 +1,8 @@
+/**
+ * @file state.hpp
+ * @brief header of AbstractState class
+ */
+
 #pragma once
 
 #include <list>
@@ -8,8 +13,10 @@ struct AbstractState {
   AbstractState(const AbstractState&) = default;
   AbstractState(AbstractState&&) noexcept = default;
   virtual ~AbstractState() = default;
+
   auto operator=(const AbstractState&) -> AbstractState& = default;
   auto operator=(AbstractState&&) -> AbstractState& = default;
+
   // Please override the following functions
   template <class State>
   auto getNextStates() const -> std::list<State>;

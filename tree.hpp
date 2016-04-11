@@ -1,3 +1,8 @@
+/**
+ * @file tree.hpp
+ * @brief header of Tree class
+ */
+
 #pragma once
 
 #include "node.hpp"
@@ -9,6 +14,7 @@ class Tree {
   using NodesItr = typename Nodes<State>::const_iterator;
 
   Tree() = delete;
+
   template <class State, class F>
   static auto _getNodePosition(const Nodes<State>& nodes,
                                const F& function) -> NodesItr<State>;

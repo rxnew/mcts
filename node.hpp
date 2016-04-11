@@ -1,3 +1,8 @@
+/**
+ * @file node.hpp
+ * @brief header of Node class
+ */
+
 #pragma once
 
 #include <list>
@@ -21,6 +26,7 @@ class Node {
   template <class T = State>
   explicit Node(T&& state);
   ~Node();
+
   auto setChildNodes() -> bool;
   auto getValue() const -> double;
   auto getValueUct(int total_count) const -> double;
