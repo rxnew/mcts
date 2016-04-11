@@ -20,7 +20,7 @@ auto Tree::_selectPlayoutNode(const Nodes<State>& leaf_nodes, int total_count)
 
 template <class State>
 inline auto Tree::_isPlayoutLimit(const Node<State>* const node) -> bool {
-  return node->count_ >= playout_limit;
+  return node->count_ >= params::playout_limit;
 }
 
 template <class State>
@@ -56,20 +56,13 @@ auto Tree::_selectBetterState(const Node<State>* const root_node) -> State {
   return result_node->state_;
 }
 
-inline auto Tree::setParams(int playout_number, int playout_limit,
-                            double evaluation_param) -> void {
-  mcts::playout_number = playout_number;
-  mcts::playout_limit = playout_limit;
-  mcts::evaluation_param = evaluation_param;
-}
-
 template <class T, class State>
 auto Tree::search(T&& state) -> State {
   if(state.isEnd()) return std::forward<State>(state);
   auto* root_node = new Node<State>(std::forward<State>(state));
   root_node->expand();
   auto leaf_nodes = root_node->child_nodes_;
-  for(int i = 0; i < playout_number; i++) {
+  for(int i = 0; i < params::playout_number; i++) {
     if(!Tree::_update(root_node, leaf_nodes)) break;
   }
   auto better_state = Tree::_selectBetterState(root_node); 
