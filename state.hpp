@@ -13,8 +13,8 @@ struct AbstractState {
   // Please override the following functions
   template <class State>
   auto getNextStates() const -> std::list<State>;
-  virtual auto isEnd() const -> bool = 0;
-  virtual auto shiftNextRandomly() -> void = 0;
-  virtual auto getScore() const -> int = 0;
+  auto isEnd() const -> bool;
+  auto shiftNextRandomly() -> void;
+  auto getScore() const -> int;
 };
 }
