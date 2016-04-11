@@ -3,7 +3,7 @@
 #include <cmath>
 #include <cassert>
 
-#include "params.hpp"
+#include "../params.hpp"
 
 namespace mcts {
 template <class State>
