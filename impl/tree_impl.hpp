@@ -2,8 +2,8 @@
 
 namespace mcts {
 template <class State, class F>
-auto Tree::_getNodePosition(const Nodes<State>& nodes, const F& function)
-  -> NodesItr<State> {
+auto Tree::_getNodePosition(const Nodes<State>& nodes,
+                            const F& function) -> NodesItr<State> {
   auto node_pos = nodes.cend();
   double max_value = -1.0;
   for(auto it = nodes.cbegin(); it != nodes.cend(); it++) {
@@ -18,26 +18,12 @@ auto Tree::_getNodePosition(const Nodes<State>& nodes, const F& function)
 }
 
 template <class State>
-auto Tree::_selectPlayoutNode(const Nodes<State>& leaf_nodes, int total_count)
-  -> NodesItr<State> {
+auto Tree::_selectPlayoutNode(const Nodes<State>& leaf_nodes,
+                              int total_count) -> NodesItr<State> {
   auto function = [total_count](Node<State>* node) {
     return node->getValueUct(total_count);
   };
   return Tree::_getNodePosition(leaf_nodes, function);
-  /*
-  auto selected_node_pos = leaf_nodes.cend();
-  double max_value = -1.0;
-  for(auto it = leaf_nodes.cbegin(); it != leaf_nodes.cend(); it++) {
-    assert((*it)->isLeafNode());
-    auto value = (*it)->getValueUct(total_count);
-    if(value > max_value) {
-      selected_node_pos = it;
-      max_value = value;
-    }
-  }
-  assert(selected_node_pos != leaf_nodes.cend());
-  return selected_node_pos;
-  */
 }
 
 template <class State>
@@ -66,20 +52,6 @@ auto Tree::_selectBetterState(const Node<State>* const root_node) -> State {
   assert(!root_node->isLeafNode());
   auto function = [](Node<State>* node) {return node->getValue();};
   return (*Tree::_getNodePosition(root_node->child_nodes_, function))->state_;
-  /*
-  Node<State>* result_node = nullptr;
-  double max_value = -1.0;
-  assert(!root_node->isLeafNode());
-  for(auto* node : root_node->child_nodes_) {
-    auto value = node->getValue();
-    if(value > max_value) {
-      result_node = node;
-      max_value = value;
-    }
-  }
-  assert(result_node != nullptr);
-  return result_node->state_;
-  */
 }
 
 template <class T, class State>
