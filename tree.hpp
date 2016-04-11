@@ -25,9 +25,6 @@ class Tree {
                         double evaluation_param) -> void;
   template <class T, class State = typename std::remove_reference<T>::type>
   static auto search(T&& state) -> State;
-
-  template <class State>
-  friend class Node;
 };
 }
 
