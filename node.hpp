@@ -1,6 +1,5 @@
 #pragma once
 
-#include "params.hpp"
 #include "state.hpp"
 
 namespace mcts {

@@ -3,6 +3,8 @@
 #include <cmath>
 #include <cassert>
 
+#include "params.hpp"
+
 namespace mcts {
 template <class State>
 template <class T>
