@@ -9,6 +9,9 @@ class Tree {
   using NodesItr = typename Nodes<State>::const_iterator;
 
   Tree() = delete;
+  template <class State, class F>
+  static auto _getNodePosition(const Nodes<State>& leaf_nodes,
+                               const F& function) -> void;
   template <class State>
   static auto _selectPlayoutNode(const Nodes<State>& leaf_nodes,
                                  int total_count) -> NodesItr<State>;

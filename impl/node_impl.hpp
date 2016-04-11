@@ -36,7 +36,7 @@ inline auto Node<State>::getValue() const -> double {
 }
 
 template <class State>
-inline auto Node<State>::getValueUCT(int total_count) const -> double {
+inline auto Node<State>::getValueUct(int total_count) const -> double {
   assert(this->count_);
   auto x = static_cast<double>(this->score_) / this->count_;
   auto y = std::sqrt(std::log(total_count) / this->count_);

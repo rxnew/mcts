@@ -24,7 +24,7 @@ class Node {
   ~Node();
   auto setChildNodes() -> bool;
   auto getValue() const -> double;
-  auto getValueUCT(int total_count) const -> double;
+  auto getValueUct(int total_count) const -> double;
   auto isLeafNode() const -> bool;
   auto update(int score) -> void;
   auto playout() -> void;

@@ -1,21 +1,43 @@
 #pragma once
 
 namespace mcts {
+template <class State, class F>
+auto Tree::_getNodePosition(const Nodes<State>& leaf_nodes, const F& function)
+  -> void {
+  auto node_pos = leaf_nodes.cend();
+  double max_value = -1.0;
+  for(auto it = leaf_nodes.cbegin(); it != leaf_nodes.cend(); it++) {
+    auto value = function(*it);
+    if(value > max_value) {
+      node_pos = it;
+      max_value = value;
+    }
+  }
+  assert(node_pos != leaf_nodes.cend());
+  return node_pos;
+}
+
 template <class State>
 auto Tree::_selectPlayoutNode(const Nodes<State>& leaf_nodes, int total_count)
   -> NodesItr<State> {
+  auto function = [total_count](Node<State>* node) {
+    return node->getValueUct(total_count);
+  };
+  return Tree::_getNodePosition(leaf_nodes, function);
+  /*
   auto selected_node_pos = leaf_nodes.cend();
   double max_value = -1.0;
   for(auto it = leaf_nodes.cbegin(); it != leaf_nodes.cend(); it++) {
     assert((*it)->isLeafNode());
-    auto value = (*it)->getValueUCT(total_count);
+    auto value = (*it)->getValueUct(total_count);
     if(value > max_value) {
       selected_node_pos = it;
       max_value = value;
     }
-  } 
+  }
   assert(selected_node_pos != leaf_nodes.cend());
   return selected_node_pos;
+  */
 }
 
 template <class State>
@@ -41,6 +63,9 @@ auto Tree::_update(const Node<State>* const root_node,
 
 template <class State>
 auto Tree::_selectBetterState(const Node<State>* const root_node) -> State {
+  auto function = [total_count](Node<State>* node) {return node->getValue();};
+  return (*Tree::_getNodePosition(leaf_nodes, function))->state_;
+  /*
   Node<State>* result_node = nullptr;
   double max_value = -1.0;
   assert(!root_node->isLeafNode());
@@ -53,6 +78,7 @@ auto Tree::_selectBetterState(const Node<State>* const root_node) -> State {
   }
   assert(result_node != nullptr);
   return result_node->state_;
+  */
 }
 
 template <class T, class State>
