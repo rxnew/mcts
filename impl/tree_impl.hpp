@@ -2,18 +2,18 @@
 
 namespace mcts {
 template <class State, class F>
-auto Tree::_getNodePosition(const Nodes<State>& leaf_nodes, const F& function)
+auto Tree::_getNodePosition(const Nodes<State>& nodes, const F& function)
   -> void {
-  auto node_pos = leaf_nodes.cend();
+  auto node_pos = nodes.cend();
   double max_value = -1.0;
-  for(auto it = leaf_nodes.cbegin(); it != leaf_nodes.cend(); it++) {
+  for(auto it = nodes.cbegin(); it != nodes.cend(); it++) {
     auto value = function(*it);
     if(value > max_value) {
       node_pos = it;
       max_value = value;
     }
   }
-  assert(node_pos != leaf_nodes.cend());
+  assert(node_pos != nodes.cend());
   return node_pos;
 }
 
@@ -63,8 +63,8 @@ auto Tree::_update(const Node<State>* const root_node,
 
 template <class State>
 auto Tree::_selectBetterState(const Node<State>* const root_node) -> State {
-  auto function = [total_count](Node<State>* node) {return node->getValue();};
-  return (*Tree::_getNodePosition(leaf_nodes, function))->state_;
+  auto function = [](Node<State>* node) {return node->getValue();};
+  return (*Tree::_getNodePosition(root_node->child_nodes_, function))->state_;
   /*
   Node<State>* result_node = nullptr;
   double max_value = -1.0;
