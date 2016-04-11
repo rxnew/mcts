@@ -1,5 +1,7 @@
 #pragma once
 
+#include <list>
+
 namespace mcts {
 template <class State>
 class Node;
