@@ -1,5 +1,7 @@
 #pragma once
 
+#include <limits>
+
 namespace mcts {
 template <class State, class F>
 auto Tree::_getNodePosition(const Nodes<State>& nodes,
