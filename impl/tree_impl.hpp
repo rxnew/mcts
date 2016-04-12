@@ -5,7 +5,7 @@ template <class State, class F>
 auto Tree::_getNodePosition(const Nodes<State>& nodes,
                             const F& function) -> NodesItr<State> {
   auto node_pos = nodes.cend();
-  double max_value = -DBL_MAX;
+  double max_value = std::numeric_limits<double>::lowest();
   for(auto it = nodes.cbegin(); it != nodes.cend(); it++) {
     auto value = function(*it);
     if(value > max_value) {
