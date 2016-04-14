@@ -61,7 +61,7 @@ auto Tree::search(T&& state) -> State {
   for(int i = 0; i < params::playout_number; i++) {
     Tree::_update(root_node);
   }
-  auto better_state = Tree::_selectBetterState(root_node); 
+  auto better_state = Tree::_selectBetterState(root_node);
   delete root_node;
   return std::move(better_state);
 }

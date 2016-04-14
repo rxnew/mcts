@@ -27,13 +27,13 @@ class Node {
   explicit Node(T&& state);
   ~Node();
 
-  auto setChildNodes() -> bool;
+  auto setChildNodes() -> void;
   auto getExpectedValue() const -> double;
   auto getUcb1Value(int total_count) const -> double;
   auto isLeafNode() const -> bool;
   auto update(int score) -> void;
   auto playout() -> void;
-  auto expand() -> bool;
+  auto expand() -> void;
 
   friend class Tree;
 };

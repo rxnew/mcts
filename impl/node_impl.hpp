@@ -21,14 +21,13 @@ Node<State>::~Node() {
 }
 
 template <class State>
-auto Node<State>::setChildNodes() -> bool {
-  if(this->state_.isEnd()) return false;
+auto Node<State>::setChildNodes() -> void {
+  if(this->state_.isEnd()) return;
   for(const auto& state : this->state_.template getNextStates<State>()) {
     auto* node = new Node<State>(state);
     node->parent_node_ = this;
     this->child_nodes_.push_back(node);
   }
-  return true;
 }
 
 template <class State>
@@ -66,11 +65,10 @@ auto Node<State>::playout() -> void {
 }
 
 template <class State>
-auto Node<State>::expand() -> bool {
-  if(!this->setChildNodes()) return false;
+auto Node<State>::expand() -> void {
+  if(!this->setChildNodes()) return;
   for(auto* node : this->child_nodes_) {
     node->playout();
   }
-  return true;
 }
 }
