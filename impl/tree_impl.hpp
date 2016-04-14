@@ -6,8 +6,8 @@ namespace mcts {
 template <class State, class F>
 auto Tree::_searchNode(const Nodes<State>& nodes,
                             const F& function) -> Node<State>* {
-  auto* result_node = nullptr;
-  double max_value = std::numeric_limits<double>::lowest();
+  Node<State>* result_node = nullptr;
+  auto max_value = std::numeric_limits<double>::lowest();
   for(auto* node : nodes) {
     auto value = function(node);
     if(value > max_value) {
@@ -36,7 +36,7 @@ inline auto Tree::_isPlayoutLimit(const Node<State>* const node) -> bool {
 }
 
 template <class State>
-auto Tree::_update(const Node<State>* const root_node) -> void {
+auto Tree::_update(Node<State>* const root_node) -> void {
   auto* node = Tree::_selectPlayoutNode(root_node, root_node->count_);
   node->playout();
   if(Tree::_isPlayoutLimit(node)) {

@@ -21,7 +21,7 @@ class Tree {
   template <class State>
   static auto _isPlayoutLimit(const Node<State>* const node) -> bool;
   template <class State>
-  static auto _update(const Node<State>* const root_node) -> void;
+  static auto _update(Node<State>* const root_node) -> void;
   template <class State>
   static auto _selectBetterState(const Node<State>* const root_node) -> State;
 
