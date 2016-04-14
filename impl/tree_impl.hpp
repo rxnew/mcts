@@ -24,7 +24,7 @@ auto Tree::_selectPlayoutNode(Node<State>* const node,
                               int total_count) -> Node<State>* {
   if(node->isLeafNode()) return node;
   auto function = [total_count](const Node<State>* const node) {
-    return node->getValueUcb1(total_count);
+    return node->getUcb1Value(total_count);
   };
   auto next_node = Tree::_searchNode(node->child_nodes_, function);
   return Tree::_selectPlayoutNode(next_node, total_count);
@@ -47,7 +47,9 @@ auto Tree::_update(Node<State>* const root_node) -> void {
 template <class State>
 auto Tree::_selectBetterState(const Node<State>* const root_node) -> State {
   assert(!root_node->isLeafNode());
-  auto function = [](const Node<State>* const node) {return node->getValue();};
+  auto function = [](const Node<State>* const node) {
+    return node->getExpectedValue();
+  };
   return (Tree::_searchNode(root_node->child_nodes_, function))->state_;
 }
 

@@ -28,8 +28,8 @@ class Node {
   ~Node();
 
   auto setChildNodes() -> bool;
-  auto getValue() const -> double;
-  auto getValueUcb1(int total_count) const -> double;
+  auto getExpectedValue() const -> double;
+  auto getUcb1Value(int total_count) const -> double;
   auto isLeafNode() const -> bool;
   auto update(int score) -> void;
   auto playout() -> void;

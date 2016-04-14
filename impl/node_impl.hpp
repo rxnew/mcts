@@ -32,17 +32,16 @@ auto Node<State>::setChildNodes() -> bool {
 }
 
 template <class State>
-inline auto Node<State>::getValue() const -> double {
+inline auto Node<State>::getExpectedValue() const -> double {
   assert(this->count_);
   return static_cast<double>(this->score_) / this->count_;
 }
 
 template <class State>
-auto Node<State>::getValueUcb1(int total_count) const -> double {
+auto Node<State>::getUcb1Value(int total_count) const -> double {
   assert(this->count_);
-  auto x = static_cast<double>(this->score_) / this->count_;
-  auto y = std::sqrt(std::log(2 * total_count) / this->count_);
-  return x + params::exploration_param * y;
+  auto bias = std::sqrt(std::log(2 * total_count) / this->count_);
+  return this->getExpectedValue() + params::exploration_param * bias;
 }
 
 template <class State>
