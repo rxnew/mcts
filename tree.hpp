@@ -16,7 +16,7 @@ class Tree {
   static auto _searchNode(const Nodes<State>& nodes,
                           const F& function) -> Node<State>*;
   template <class State>
-  static auto _selectPlayoutNode(const Node<State>* const node,
+  static auto _selectPlayoutNode(Node<State>* const node,
                                  int total_count) -> Node<State>*;
   template <class State>
   static auto _isPlayoutLimit(const Node<State>* const node) -> bool;
