@@ -20,7 +20,7 @@ auto Tree::_searchNode(const Nodes<State>& nodes,
 }
 
 template <class State>
-auto Tree::_selectPlayoutNode(const Node<State>* const node,
+auto Tree::_selectPlayoutNode(Node<State>* const node,
                               int total_count) -> Node<State>* {
   if(node->isLeafNode()) return node;
   auto function = [total_count](const Node<State>* const node) {
