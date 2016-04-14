@@ -38,10 +38,10 @@ inline auto Node<State>::getValue() const -> double {
 }
 
 template <class State>
-auto Node<State>::getValueUct(int total_count) const -> double {
+auto Node<State>::getValueUcb1(int total_count) const -> double {
   assert(this->count_);
   auto x = static_cast<double>(this->score_) / this->count_;
-  auto y = std::sqrt(std::log(total_count) / this->count_);
+  auto y = std::sqrt(std::log(2 * total_count) / this->count_);
   return x + params::exploration_param * y;
 }
 

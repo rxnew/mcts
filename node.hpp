@@ -29,7 +29,7 @@ class Node {
 
   auto setChildNodes() -> bool;
   auto getValue() const -> double;
-  auto getValueUct(int total_count) const -> double;
+  auto getValueUcb1(int total_count) const -> double;
   auto isLeafNode() const -> bool;
   auto update(int score) -> void;
   auto playout() -> void;

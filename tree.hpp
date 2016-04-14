@@ -10,22 +10,18 @@
 namespace mcts {
 class Tree {
  private:
-  template <class State>
-  using NodesItr = typename Nodes<State>::const_iterator;
-
   Tree() = delete;
 
   template <class State, class F>
-  static auto _getNodePosition(const Nodes<State>& nodes,
-                               const F& function) -> NodesItr<State>;
+  static auto _searchNode(const Nodes<State>& nodes,
+                          const F& function) -> Node<State>*;
   template <class State>
-  static auto _selectPlayoutNode(const Nodes<State>& leaf_nodes,
-                                 int total_count) -> NodesItr<State>;
+  static auto _selectPlayoutNode(const Node<State>* const node,
+                                 int total_count) -> Node<State>*;
   template <class State>
   static auto _isPlayoutLimit(const Node<State>* const node) -> bool;
   template <class State>
-  static auto _update(const Node<State>* const root_node,
-                      Nodes<State>& leaf_nodes) -> bool;
+  static auto _update(const Node<State>* const root_node) -> void;
   template <class State>
   static auto _selectBetterState(const Node<State>* const root_node) -> State;
 
