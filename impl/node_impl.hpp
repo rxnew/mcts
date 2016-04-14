@@ -66,7 +66,7 @@ auto Node<State>::playout() -> void {
 
 template <class State>
 auto Node<State>::expand() -> void {
-  if(!this->setChildNodes()) return;
+  this->setChildNodes();
   for(auto* node : this->child_nodes_) {
     node->playout();
   }
