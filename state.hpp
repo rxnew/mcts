@@ -21,7 +21,7 @@ struct AbstractState {
   template <class State>
   auto getNextStates() const -> std::list<State>;
   virtual auto isEnd() const -> bool = 0;
-  virtual auto shiftNextRandomly() -> void = 0;
+  virtual auto transitionRandomly() -> void = 0;
   virtual auto getScore() const -> int = 0;
 };
 }

@@ -59,7 +59,7 @@ template <class State>
 auto Node<State>::playout() -> void {
   auto state = this->state_;
   while(!state.isEnd()) {
-    state.shiftNextRandomly();
+    state.transitionRandomly();
   }
   this->update(state.getScore());
 }
