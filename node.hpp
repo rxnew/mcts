@@ -17,7 +17,7 @@ using Nodes = std::list<Node<State>*>;
 template <class State>
 class Node {
  private:
-  using State::score_t;
+  using score_t = typename State::score_t;
 
   State state_;
   Node* parent_node_;
