@@ -9,6 +9,8 @@
 
 namespace mcts {
 struct AbstractState {
+  using score_t = int;
+
   AbstractState() = default;
   AbstractState(const AbstractState&) = default;
   AbstractState(AbstractState&&) noexcept = default;
@@ -22,6 +24,6 @@ struct AbstractState {
   auto getNextStates() const -> std::list<State>;
   virtual auto isEnd() const -> bool = 0;
   virtual auto transitionRandomly() -> void = 0;
-  virtual auto getScore() const -> int = 0;
+  virtual auto getScore() const -> score_t = 0;
 };
 }

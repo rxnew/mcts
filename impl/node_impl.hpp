@@ -49,7 +49,7 @@ inline auto Node<State>::isLeafNode() const -> bool {
 }
 
 template <class State>
-auto Node<State>::update(int score) -> void {
+auto Node<State>::update(score_t score) -> void {
   if(this->parent_node_) this->parent_node_->update(score);
   this->score_ += score;
   this->count_++;

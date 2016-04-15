@@ -17,10 +17,12 @@ using Nodes = std::list<Node<State>*>;
 template <class State>
 class Node {
  private:
+  using State::score_t;
+
   State state_;
   Node* parent_node_;
   Nodes<State> child_nodes_;
-  int score_;
+  score_t score_;
   int count_;
 
   template <class T = State>
@@ -31,7 +33,7 @@ class Node {
   auto getExpectedValue() const -> double;
   auto getUcb1Value(int total_count) const -> double;
   auto isLeafNode() const -> bool;
-  auto update(int score) -> void;
+  auto update(score_t score) -> void;
   auto playout() -> void;
   auto expand() -> void;
 
