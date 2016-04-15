@@ -39,7 +39,7 @@ inline auto Node<State>::getExpectedValue() const -> double {
 template <class State>
 auto Node<State>::getUcb1Value(int total_count) const -> double {
   assert(this->count_);
-  auto bias = std::sqrt(std::log(2 * total_count) / this->count_);
+  auto bias = std::sqrt(2 * std::log(total_count) / this->count_);
   return this->getExpectedValue() + params::exploration_param * bias;
 }
 
