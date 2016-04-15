@@ -10,7 +10,7 @@
 namespace mcts {
 template <class ScoreType>
 struct AbstractState {
-  using score_t = typename ScoreType;
+  using score_t = ScoreType;
 
   AbstractState() = default;
   AbstractState(const AbstractState&) = default;
@@ -25,6 +25,6 @@ struct AbstractState {
   auto getNextStates() const -> std::list<State>;
   virtual auto isEnd() const -> bool = 0;
   virtual auto transitionRandomly() -> void = 0;
-  virtual auto getScore() const -> score_t;
+  virtual auto getScore() const -> score_t = 0;
 };
 }
