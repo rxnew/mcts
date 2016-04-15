@@ -23,7 +23,8 @@ Node<State>::~Node() {
 template <class State>
 auto Node<State>::setChildNodes() -> void {
   if(this->state_.isEnd()) return;
-  for(const auto& state : this->state_.template getNextStates<State>()) {
+  //for(const auto& state : this->state_.template getNextStates<State>()) {
+  for(const auto& state : this->state_.getNextStates()) {
     auto* node = new Node<State>(state);
     node->parent_node_ = this;
     this->child_nodes_.push_back(node);

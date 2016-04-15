@@ -18,8 +18,7 @@ struct AbstractState {
   auto operator=(AbstractState&&) -> AbstractState& = default;
 
   // Please override the following functions
-  template <class State>
-  auto getNextStates() const -> std::list<State>;
+  auto getNextStates() const -> std::list<typename decltype(std::remove_reference<*this>::type)>;
   virtual auto isEnd() const -> bool = 0;
   virtual auto shiftNextRandomly() -> void = 0;
   virtual auto getScore() const -> int = 0;
